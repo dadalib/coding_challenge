@@ -1,5 +1,8 @@
 import re
 import math
+from unittest import result
+import string
+from xml.dom.expatbuilder import InternalSubsetExtractor
 
 def disemvowel(string_):
     vowels = ['A','E','I','O','U']
@@ -104,30 +107,130 @@ def to_camel_case(text):
 
     list_chr = ['-','_']
     next_text = ""
+    print("First char ",text[0])
+    if text[0].isupper():
+        for c in text:
+            if c in list_chr:
+                next_text+=" "
+            
+            else:
+            
+                next_text+=c
 
-    for c in text:
-        print(c)
-        if c in list_chr:
-            next_text+=" "
-            # next_text.join(" ")
-        else:
-           
-            next_text+=c
-            # next_text.join(c)
-
-
-    next_text = next_text.title()
-    next_text = next_text.strip()
-    next_text = next_text.replace(" ","")
+        next_text = next_text.title()
+        next_text = next_text.strip()
+        next_text = next_text.replace(" ","")
+    else:
+        pass
     
 
     
     return next_text
 
-def to_camel_case_v2_expection(text):
+def create_phone_number(n):
+    result=""
+    if len(n)<10:
+        raise ValueError("Please enter a good list")
+
+    for index, value in enumerate(n):
+        if index == 0:
+            result +='('+str(value)
+
+        elif index <2 and index >0:
+            result += str(value)
+            
+        elif index==2:
+            result +=str(value)+') '
+
+        elif index>2 and index <5:
+            result +=str(value)
+
+        elif index==5:
+            result += str(value)+'-'
+        elif index >5:
+            result += str(value)
+
+    return result
 
 
+def create_phone_number_short(n):
+    """List manipulation"""
+    n = ''.join(map(str,n))
+    print("type", n)
+    return '(%s) %s-%s'%(n[:3],n[3:6],n[6:])
 
+def square_digits(num):
+    """power of two"""
+    result=""
+    power = 2
+    str_num = str(num)
+    for value in str_num :
+        result+=str(int(math.pow(int(value),power)))
+
+    return int(result)
+
+
+def square_digits_short(num):
+    """Using join"""
+    return int(''.join(str(int(d)**2) for d in str(num)))
+
+def alphabet_position(text):
+    """Dictionary use zip or  and get"""
+    alphabet=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    alphabet_num = [*range(1,len(alphabet)+1,1)]
+    result = ""
+    
+
+    if len(alphabet) != len(alphabet_num):
+        raise ValueError("Wrong matching for dictonary")
+
+    alphabet_dict = dict(zip(alphabet,alphabet_num))
+
+    for ch in text:
+        if ch.lower() in alphabet_dict.keys():
+            result+= str(alphabet_dict.get(ch.lower()))+' '
+
+    return result.strip()
+
+def generate_alphabet():
+    alphabet_lst=list(string.ascii_lowercase)
+    alphabet_num= list(range(1,len(alphabet_lst)+1,1))
+    return alphabet_lst,alphabet_num
+
+def unique_in_order(iterable):
+    result =[]
+    result_without_double=[]
+
+    print("lenI",len(iterable))
+    if len(iterable)<1:
+        return []
+
+    if len(iterable)==1:
+        return list(str(iterable))
+    # Make the list
+    for c in iterable:
+        result.append(c)
+    print(result)
+
+    # Take out the repete sequence
+    for index , value in enumerate(result):
+
+        if len(result) > (index+1):
+            if result[index] != result[index+1]:
+                result_without_double.append(value)
+    if result[-1] != result_without_double[-1]:
+        result_without_double.append(result[-1])
+
+
+    return result_without_double
+
+def unique_in_order_short(iterable):
+    res = []
+    for item in iterable:
+        if len(res) == 0 or item != res[-1]:
+            print("Len",len(res))
+            res.append(item)
+    return res
 
 
 if __name__ == '__main__':
@@ -137,7 +240,14 @@ if __name__ == '__main__':
     # b = -16
     # print(get_sum_v2(-24,15))
     # print(find_next_square(145))
-    print(to_camel_case("Toto_le_pregunto_si_Tengo-novia"))
+    # print(to_camel_case("Toto_le_pregunto_si_Tengo-novia"))
+    # print(create_phone_number_short([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
+    #print(square_digits(9119))
+    #print(square_digits_short(9119))
+    #print(alphabet_position("The sunset sets at twelve o' clock."))
+    # print(generate_alphabet())
+    # print(unique_in_order('A'))
+    print(unique_in_order_short('AAAABBBCCDAABBB'))
 
 
 
