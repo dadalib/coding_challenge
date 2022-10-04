@@ -1,5 +1,6 @@
 import re
 import math
+from sqlite3 import OperationalError
 from unittest import result
 import string
 from xml.dom.expatbuilder import InternalSubsetExtractor
@@ -232,6 +233,63 @@ def unique_in_order_short(iterable):
             res.append(item)
     return res
 
+def is_prime(num):
+
+    flag = True
+    if num == 2 :
+        return True
+    if num <0 or  num ==1 :
+        return False
+
+    for divisor in range(2,int(num // 2)+1):
+        if num % divisor == 0:
+            flag = False
+
+    return flag
+
+def is_prime_shopt(num):
+    if num <= 1:
+        return False
+    i = 2
+    while i <= math.sqrt(num):    
+        if num%i == 0:
+            return False
+        i += 1
+    return True 
+
+def anagrams(word, words):
+    # anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']) => ['aabb', 'bbaa']
+    results = []
+    for c in word:
+        for index,value in enumerate(words):
+            print("value",value)
+            if word.count(c) == value.count(c):
+                print('c',c)
+                results.append(value)
+                
+    return results
+
+def digital_root(n):
+    while n//10 !=0:
+        operation =int()
+        for i in str(n):
+            
+            operation +=int(i)
+        n = operation
+        print(operation) 
+
+    return n
+
+def digital_root_short(n):
+    """Recursivity"""
+    return n if n < 10 else digital_root(sum(map(int,str(n))))
+        
+   
+
+
+
+
+
 
 if __name__ == '__main__':
     # print(disemvowel("This website is for losers LOL!"))
@@ -247,7 +305,12 @@ if __name__ == '__main__':
     #print(alphabet_position("The sunset sets at twelve o' clock."))
     # print(generate_alphabet())
     # print(unique_in_order('A'))
-    print(unique_in_order_short('AAAABBBCCDAABBB'))
+    # print(unique_in_order_short('AAAABBBCCDAABBB'))
+    # print(is_prime(14))
+    # print(anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']))
+    # print(anagrams('abba', 'afba'))
+    # print(digital_root(145))
+    print(digital_root_short(145))
 
 
 
