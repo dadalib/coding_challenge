@@ -304,6 +304,37 @@ def pig_it(text):
 
     return result.strip()
 
+def pig_it(text):
+    lst = text.split()
+    return ' '.join( [word[1:] + word[:1] + 'ay' if word.isalpha() else word for word in lst])
+
+def solution(s):
+    """"camelCasing"  =>  "camel Casing"""
+    results=""
+    for c in s:
+        if c.isupper():
+            results+=' '+c
+        else:
+            results+=c
+
+
+    return results
+def solution_short(s):
+    return ''.join(' ' + c if c.isupper() else c for c in s)
+
+def duplicate_count(text):
+    """# 'a' occurs twice and 'b' twice (`b` and `B`)"""
+    result = []
+    upper_txt = text.upper()
+    for c in upper_txt:
+        if upper_txt.count(c) >1:
+            if c not in result:
+                result.append(c)
+
+    return len(result)
+
+def duplicate_count_short(s):
+  return len([c for c in set(s.lower()) if s.lower().count(c)>1])
 
 if __name__ == '__main__':
     # print(disemvowel("This website is for losers LOL!"))
@@ -326,7 +357,9 @@ if __name__ == '__main__':
     # print(digital_root(145))
     # print(digital_root_short(145))
     # print(expanded_form(120))e
-    print(pig_it("O latin is cool !"))
+    # print(pig_it("O latin is cool !"))
+    # print(solution("camelCasin"))
+    print(duplicate_count("aabBcd"))
 
 
 
