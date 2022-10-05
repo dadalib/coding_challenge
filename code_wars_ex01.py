@@ -285,10 +285,24 @@ def digital_root_short(n):
     return n if n < 10 else digital_root(sum(map(int,str(n))))
         
    
+def expanded_form(num):
+    """Expand num 12 Should return '10 + 2'"""
+    num = list(str(num))
+    return ' + '.join(x + '0' * (len(num) - y - 1) for y,x in enumerate(num) if x != '0')
 
+def pig_it(text):
+    """pig_it('Pig latin is cool') # igPay atinlay siay oolcay"""
+    result =""
+    buffer = text.split()
 
+    for word in buffer:
+            if word == "!" or word =="?":
+                result+=word
+            
+            else:
+                result+=word[1::]+word[0]+'ay'+' '
 
-
+    return result.strip()
 
 
 if __name__ == '__main__':
@@ -310,7 +324,9 @@ if __name__ == '__main__':
     # print(anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']))
     # print(anagrams('abba', 'afba'))
     # print(digital_root(145))
-    print(digital_root_short(145))
+    # print(digital_root_short(145))
+    # print(expanded_form(120))e
+    print(pig_it("O latin is cool !"))
 
 
 
