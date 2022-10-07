@@ -4,6 +4,7 @@ from sqlite3 import OperationalError
 from unittest import result
 import string
 from xml.dom.expatbuilder import InternalSubsetExtractor
+import random
 
 def disemvowel(string_):
     vowels = ['A','E','I','O','U']
@@ -336,6 +337,27 @@ def duplicate_count(text):
 def duplicate_count_short(s):
   return len([c for c in set(s.lower()) if s.lower().count(c)>1])
 
+def random_exercices():
+    """ex 49 :random randage  start , stop, steps"""
+    return (random.randrange(1,10,1))
+
+# Heritage needs to be done 
+class Compute():
+    def __init__(self,ram,storage):
+        print("RAM=",ram)
+        print("Storage=",storage)
+
+class Laptop(Compute):
+    def __init__(self,ram,storage,model):
+        print("Model is:",model)
+        super().__init__(ram,storage)
+
+    
+    
+
+
+
+
 if __name__ == '__main__':
     # print(disemvowel("This website is for losers LOL!"))
     # print(disemvowel_short("This website is for losers LOL!"))
@@ -359,7 +381,9 @@ if __name__ == '__main__':
     # print(expanded_form(120))e
     # print(pig_it("O latin is cool !"))
     # print(solution("camelCasin"))
-    print(duplicate_count("aabBcd"))
+    # print(duplicate_count("aabBcd"))
+    # print(random_exercices())
+    hp=Laptop('8GB','1TB','hp PAV X360')
 
 
 
