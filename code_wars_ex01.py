@@ -341,7 +341,7 @@ def random_exercices():
     """ex 49 :random randage  start , stop, steps"""
     return (random.randrange(1,10,1))
 
-# Heritage needs to be done 
+# Heritage needs to be done
 class Compute():
     def __init__(self,ram,storage):
         print("RAM=",ram)
@@ -351,7 +351,26 @@ class Laptop(Compute):
     def __init__(self,ram,storage,model):
         print("Model is:",model)
         super().__init__(ram,storage)
+        
+class Robot():
+    def __init__(self,name=None):
+        self.name = name
 
+    def say_hi(self):
+        if self.name:
+            print("Hello, I am",+ self.name)
+
+        else:
+            print("Hello I am robot without name")
+
+    def set_name(self,name):
+        self.name = name
+    
+    def get_name(self):
+        return self.name
+
+
+    
     
     
 
@@ -383,7 +402,8 @@ if __name__ == '__main__':
     # print(solution("camelCasin"))
     # print(duplicate_count("aabBcd"))
     # print(random_exercices())
-    hp=Laptop('8GB','1TB','hp PAV X360')
+    # hp=Laptop('8GB','1TB','hp PAV X360')
+
 
 
 
